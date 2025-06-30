@@ -15,6 +15,9 @@ The question is: if d gets revealed, can we recover p and q?
 
 If you don't need to understand how the algorithm works, you can jump straight to the [Source Code](#the-source-code).
 
+This algorithm tries to find a non-trivial square root of 1 mod $n$. Generally, this is a hard problem. But we can create a process that
+generates square roots of 1. And, with a high probability those square roots are non-trivial. One non-trivial square root is sufficient to recover $p$ and $q$.
+
 Looking at the definition of $d$:
 ```math
 \begin{align*}
@@ -41,7 +44,7 @@ g^k \equiv g^{c\cdot \phi(n)} \equiv (g^c)^{\phi(n)} \equiv 1 \ (\text{mod } n)
 Until now, we used equations that were very common. The trick is the following:
 look at $g^{k/2}$.
 
-Assuming p and q are non-trivial primes, then they are odd. This makes
+Assuming $p$ and $q$ are non-trivial primes, then they are odd. This makes
 $\phi(n) = (p - 1)(q - 1)$ an even number. Then, we know that $k / 2$ can be
 easily computed.
 
@@ -56,7 +59,7 @@ a^2 \equiv g^k = 1 \ (\text{mod } n)
 ```
 
 Which means that $a$ is a square root of 1. This refers to the known quadratic
-residuosity problem. The theory says that for a prime p, the equation
+residuosity problem. The theory says that for a prime $p$, the equation
 $a^2 \equiv x \ (\text{mod } p)$ has either 0 or 2 solutions in $a$. Particularly, $a^2 \equiv 1 \ (\text{mod } p)$ has the solutions $a \equiv 1 \ (\text{mod } p)$ and $a \equiv -1 \ (\text{mod } p)$.
 
 But our modulus is not prime. It's a product of primes. However, equations
@@ -84,8 +87,8 @@ And
 & a \equiv -1 \ (\text{mod } q)
 \end{align*}
 ```
-Since the results between p and q are independent, there are 4 possible
-combinations. We will use the notation a = (x, y), meaning:
+Since the results between $p$ and $q$ are independent, there are 4 possible
+combinations. We will use the notation $a = (x, y)$, meaning:
 ```math
 \begin{align*}
 & a \equiv x \ (\text{mod } p), \text{ for } 0 \leq x < p \\
@@ -118,12 +121,12 @@ In our case, knowing:
 ```
 Then:
 ```math
-a \equiv z \ (\text{mod } pq), \text{  where z is uniquely determined from x, y, p and q}
+a \equiv z \ (\text{mod } pq), \text{  where z is uniquely determined from} x, y, p \text{ and } q
 ```
 
-This means that a = (x, y) can be mapped to exactly one element modulo n.
+This means that $a = (x, y)$ can be mapped to exactly one element modulo $n$.
 
-But (1, 1) and (-1, -1) are trivial to find.
+But $(1, 1)$ and $(-1, -1)$ are trivial to find.
 ```math
 \begin{align*}
 & a = (1, 1) \text{ leads to } a \equiv 1 \ (	\text{mod } n) \\
@@ -133,11 +136,11 @@ But (1, 1) and (-1, -1) are trivial to find.
 You can check that by looking at the solution and verify that it has the
 expected values mod p and mod q.
 
-However, a = (1, -1) and a = (-1, 1) have non-trivial solutions modulo n. In
-fact, we should already know p and q to calculate them.
+However, $a = (1, -1)$ and $a = (-1, 1)$ have non-trivial solutions modulo $n$. In
+fact, we should already know $p$ and $q$ to calculate them.
 
 But earlier, we said that $a$, which we can compute, is one of the square
-roots of 1 mod n: $(1, 1)$, $(-1, -1)$, $(1, -1)$, $(-1, 1)$.
+roots of 1 mod $n$: $(1, 1)$, $(-1, -1)$, $(1, -1)$, $(-1, 1)$.
 And it is computed by taking an arbitrary $g$ from the group, and setting $a = g^{k/2}$.
 
 What we hope is that $a = g^{k/2}$ is not a trivial root. For
@@ -173,7 +176,7 @@ What if $a = 1$? What we can try is to set $a$ to:
 Let $m = k / (2^{f-1})$. Then $g^m = 1 \ (	\text{mod } n)$  and $a = g^{m/2}$ is a square root of 1.
 
 This process finds an exponent for which $a$ might not be 1. If $a$ isn't a non-trivial root, choose
-another g and try again.
+another $g$ and try again.
 
 What I can guarantee is that it will take you a finite amount of expected trials to find
 a non-trivial square root.
@@ -272,29 +275,29 @@ Looking at $g^{m_x} \text{ mod } p$:
 g^{m_x} \equiv g^{2^{\Delta} \cdot st 2^{a} \cdot r} \equiv g^{2^\Delta st\cdot  \phi(p)} \equiv 1 \ (\text{mod } p)
 ```
 
-However, for mod q, the two's exponent is too small, as $rst$ is odd.
+However, for mod $q$, the two's exponent is too small, as $rst$ is odd.
 Multiplying by 2 should be enough to get back to $\phi(q)$:
 ```math
 m_x = rt\cdot 2^b s / 2 = rt\cdot \phi(q) / 2
 ```
 
-What we hope is that g is a quadratic non-residue mod q. Assuming this, and using Euler's criterion and the fact that $rt$ is odd:
+What we hope is that $g$ is a quadratic non-residue mod q. Assuming this, and using Euler's criterion and the fact that $rt$ is odd:
 ```math
 g^{m_x} \equiv g^{rt\cdot phi(q) / 2} \equiv (g^{phi(q) / 2})^{rt} \equiv (-1)^{rt} \equiv -1 \ (\text{mod } q)
 ```
 
-This is great! We've got a value that's 1 mod p and -1 mod q, which we can also compute modulo n.
+This is great! We've got a value that's $1$ mod $p$ and $-1$ mod $q$, which we can also compute modulo $n$.
 This will be a non-trivial square root.
 
-However, this happens only when g is a quadratic non-residue mod q. Half of the elements are non-residues.
+However, this happens only when $g$ is a quadratic non-residue mod $q$. Half of the elements are non-residues.
 
-So, the chance of this happening, when a < b, is 1/2.
+So, the chance of this happening, when $a < b$, is 1/2.
 
 ### Second case: a = b
 
 Let x = d + a + 1
 
-This case is a little different, because we can't guarantee that $g^m_x$ will be 1 mod p or 1 mod q.
+This case is a little different, because we can't guarantee that $g^{m_x}$ will be $1 \text{ mod } p$ or $1 \text{ mod } q$.
 However, there is still a chance.
 
 ```math
