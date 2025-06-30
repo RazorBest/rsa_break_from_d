@@ -29,7 +29,7 @@ Let k = d * e - 1 = c * phi(n).
 
 From Euler's theorem, we know that:
 ```
-g^k = g^(d*e - 1) = g^(c*phi(n)) = (g^c)^(phi(n)) = 1 (mod n)
+g^k = g^(d*e - 1) = g^(c*phi(n)) = (g^c)^(phi(n)) = 1 \ (\text{mod } n) 
 ```
 
 Until now, we used equations that were very common. The trick is the following:
@@ -40,13 +40,13 @@ phi(n) = (p - 1) * (q - 1) an even number. Then, we know that k / 2 can be
 easily computed.
 
 We will introduce this variable:
-```
-a = g^(k/2) (mod n)
+```math
+a = g^(k/2) \ (\text{mod } n) 
 ```
 
 Then we can say the following:
-```
-a^2 = g^k = 1 (mod n)
+```math
+a^2 = g^k = 1 \ (\text{mod } n) 
 ```
 
 Which means that $a$ is a square root of 1. This refers to the known quadratic
@@ -59,7 +59,7 @@ modulo n are also true modulo p and q. Here is a small proof:
 ```
 Knowing:
 n = p * q, where p is prime
-e1 = e2 (mod n)
+e1 = e2 \ (\text{mod } n) 
 
 We will prove that e1 = e2 (mod p).
 
@@ -82,58 +82,74 @@ e1 = e2 (mod p)
 ```
 
 Using the result above, we can say that:
-```
-a^2 = 1 (mod p)
-a^2 = 1 (mod q)
+```math
+\begin{align*}
+& a^2 = 1 (\text{mod } p) \
+& a^2 = 1 (\text{mod } q)
+\end{align*}
 ```
 
 But, in each case, we have two solutions. For the first equation:
-```
-a = 1 (mod p)
-or
-a = -1 (mod p)
+```math
+\begin{align*}
+& a = 1 (mod p) \\
+& \text{or} \\
+& a = -1 (mod p)
+\end{align*}
 ```
 And
-```
-a = 1 (mod q)
-or
-a = -1 (mod q)
+```math
+\begin{align*}
+& a = 1 \ (\text{mod } q) \\
+& \text{or} \\
+& a = -1 \ (\text{mod} q)
+\end{align*}
 ```
 Since the results between p and q are independent, there are 4 possible
 combinations. We will use the notation a = (x, y), meaning:
-```
-a = x mod p, for 0 <= x < p
-and
-a = y mod q, for 0 <= y < q
+```math
+\begin{align*}
+& a = x \text{ mod } p, for 0 \leq x < p \\
+& \text{and} \\
+& a = y \text{ mod } q, for 0 \leq y < q
+\end{align*}
 ```
 
 Then the possible combinations are:
-```
-a = (1, 1)
-a = (1, -1)
-a = (-1, 1)
-a = (-1, -1)
+```math
+\begin{align*}
+& a = (1, 1) \\
+& a = (1, -1) \\
+& a = (-1, 1) \\
+& a = (-1, -1)
+\end{align*}
 ```
 
 Now, the last theorem that we need is the Chinese Remained Theorem. This
 tells us that given some equalities modulo some numbers, if the numbers
 are coprime, then there exists a unique solution modulo the product of
-all the numbers, that satisfies the equation. In our case
-```
-Knowing:
-a = x mod p
-a = y mod q
+all the numbers, that satisfies the equation.
 
+In our case, knowing:
+```
+\begin{align*}
+a \equiv x \ (\text{mod } p) \\
+a \equiv y \ (\text{mod } q) \\
+\end{align*}
+```
 Then:
-a = z mod p * q, where z is uniquely determined from x, y, p and q.
+```math
+a \equiv z \ (\text{mod } pq), \text{  where z is uniquely determined from x, y, p and q}
 ```
 
-This means that a = (x, y) can be mapped to exactly one element modulon n.
+This means that a = (x, y) can be mapped to exactly one element modulo n.
 
 But (1, 1) and (-1, -1) are trivial to find.
-```
-a = (1, 1) leads to a = 1 (mod n)
-a = (-1, -1) leads to a = -1 (mod n)
+```math
+\begin{align*}
+& a = (1, 1) \text{ leads to } a = 1 \ (	\text{mod } n) &
+& a = (-1, -1) \text {leads to } a = -1 \ (	\text{mod } n) 
+\end{align*}
 ```
 You can check that by looking at the solution and verify that it has the
 expected values mod p and mod q.
@@ -147,15 +163,19 @@ And it is computed by taking an arbitrary g from the group, and setting a = g^(k
 
 What we hope is that a = g^(k/2) is not a trivial root. For
 example, let's assume that a = (1, -1). Which means:
-```
-a = 1 (mod p)
-a = -1 (mod q)
+```math
+\begin{align*}
+& a = 1 \ (\text{mod } p) \\
+& a = -1 \ (\text{mod } q)
+\end{align*}
 ```
 
 Then:
-```
-a - 1 = 0 (mod p)
-a - 1 = -2 (mod q)
+```math
+\begin{align*}
+& a - 1 = 0 \ (\text{mod } p) \\
+& a - 1 = -2 \ (\text{mod } q)
+\end{align*}
 ```
 
 Which means that a-1 is divisible by p, but not by q. This is perfect!
@@ -164,186 +184,126 @@ a = (-1, 1), in which case, gcd(n, a-1) will yield q.
 
 What if a = 1? What we can try is to set a to:
 ```
-a = g^(k/2^f) mod n, where f is the biggest integer such that 2^f divides k, and a^2 = 1 (mod n)
+a = g^(k/2^f) mod n, where f is the biggest integer such that 2^f divides k, and a^2 = 1 \ (	ext{mod } n) 
 ```
 
-Let m = k / (2^(f+1)). Then g^m = 1 (mod n) and a = g^(m/2) is a square root of 1.
+Let $m = k / (2^{f+1})$. Then $g^m = 1 \ (	ext{mod } n)$  and $a = g^{m/2}$ is a square root of 1.
 
-This finds an exponent for which a might not be 1. If a isn't a non-trivial root, choose
+This process finds an exponent for which a might not be 1. If a isn't a non-trivial root, choose
 another g and try again.
 
-What I can guarantee you is that it will take you a finite amount of expected tries to find
-an a that is not a trivial square root.
+What I can guarantee you is that it will take you a finite amount of expected trials to find
+a non-trivial square root.
 
 At this point you have everything you need to write the algorithm in python.
 
-But, maybe you're curios what's the success rate of this algorithm? What
-if finding the correct g is also a hard task? The next section is dedicated
-to answering this quation.
+But, maybe you're curios what's the success rate of this algorithm. What
+if choosing the right g is also a hard task? The next section is dedicated
+to answering this question.
+
+
+---
+
 
 ## The success rate of the algorithm
 
-Let g be a random element from `Z_n*`.
+Let g be a random element from $\mathbb{Z}_n^*$.
 
-Let `k = e*d - 1 = c*phi(n) = c*(p-1)*(q-1)`
+Let $k = ed - 1 = c\phi(n) = c(p-1)(q-1)$.
 
-Define m as following:
-```
-k = m * 2^(f-1), f is the maximal integer such that g^m = 1 (mod n), and m is even.
-```
-
-We want to know how many g's in Z/nZ, g^(m/2) is a non-trivial square root of 1.
-
-We will need to look at the quadratic reciprocity property of g.
-
-Assume that g is a quadratic non-residue modulo the prime p.
-
-Then, g^phi()
-
-```
-g^m = g^(k / 2^(f-1)) = g^(c*phi(n) / 2^(f-1)) = 1 (mod n)
-```
-
-Let a = g^(m / 2).
-
-### The condition for a != 1
-
-Assume a = g^(m / 2) != 1 (mod n)
-
-```
-g^(m/2) != 1 (mod n)
-```
-
-Then:
-```
-g^(m/2) != 1 (mod p)
-or 
-g^(m/2) != 1 (mod q)
-```
-
-Without loss of generality, assume that the first equation is true:
-```
-g^(m/2) != 1 (mod p)
-```
-
-But g^(m/2) is a square root of 1 modulo p. The only possibility is:
-```
-g^(m/2) = -1 (mod p)
-```
-
-But `g^m = 1 (mod n)`:
-Meaning that:
-```
-g^m = 1 (mod p)
-```
-
-Let `o_p` = ord(g, p), the order of g, modulo p.
-
-Then, `o_p` must divide m:
+In the algorithm, we look at $g^{k / 2^f} \ (\text{mod } n)$ until its value is not 1, or until the division can't be done anymore.
+Each iteration step can be described by:
 ```math
-m = k*o_p, for an integer k
+\begin{align*}
+& m_x = k / 2^x,\ x \geq 0 \\
+& m_x / 2 = m_{x+1}
+\end{align*}
 ```
+And the iteration stops when $m_{x+1}$ is odd or $g^{m_{x}/2} \equiv 1\ (\text{mod } n)$
 
-From the first equation, `o_p` can't divide m/2. This is possible only
-if k is odd. Otherwise, we could write `m/2 = (k/2)*o_p`.
+Let $m = m_f$, such that either m is odd or $g^{m/2} = 1 (\ (	ext{mod } n) )$.
 
-If m is even and k is odd, then `o_p` must be even.
-
-This is the only condition needed. There are phi(p) * (1 - 1 / 2^(v_2(phi(p)))) elements
-of even order modulo p. v_2(p) is the 2-adic valuation of phi(p).
-
-So, the chance that g^(m/2) = -1 (mod p) is (1 - 1 / 2^(v_2(phi(p)))).
-Similarly, the chance that g^(m/2) = -1 (mod q) is (1 - 1 / 2^(v_2(phi(q)))).
-
-The chance of finding a non-trivial square root is the chance that g^(m/2) = 1 (mod p)
-and g^(m/2) = -1 (mod q) added with the chance that g^(m/2) = -1 (mod p) and g^(m/2) = 1 (mod q).
-
-```
-P = (1 - 1 / 2^(v_2(phi(p))))*(1 / 2^(v_2(phi(q)))) + (1 / 2^(v_2(phi(p))))*(1 - 1 / 2^(v_2(phi(q)))) =
-= (2^v_2(phi(p)) - 1) / 2^(v_2(phi(p))+v_2(phi(q))) + (2^v_2(phi(q)) - 1) / 2^(v_2(phi(p)+v_2(phi(q)))) =
-= (2^v_2(phi(p)) + 2^v_2(phi(q)) - 2) / 2^v_2(phi(n))
-
-phi(p) is even. Then, 2^v_2(phi(p)) >= 2.
-2^v_2(phi(p)) - 2 >= 0
-
-P >= 2^v_2(phi(q)) / 2^v_2(phi(n)) = 2^v_2(phi(q)/phi(n)) = 2^v_2(1/phi(p)) = 2^(-v_2(phi(p))) = 1/2^v_2(phi(p))
-```
-
-### Looking at quadratic residues
-
-In the algorithm, we look at $g^{k / 2^f} mod n$ until it's value is not 1 anymore, or until the division can't be done anymore.
-Let's lay out each iteration by looking at:
+We will look at some interesting values of $m_x$. First, rewrite k by extracting the powers of 2 outside:
 ```math
-m_x = k / 2^x
+\begin{align*}
+&\text{Let } a, r\in \mathbb{Z}: \phi(p) = 2^a \cdot r, r \text{ is odd} \\
+&\text{Let } b, s\in \mathbb{Z}: \phi(q) = 2^b \cdot s, s \text{ is odd} \\
+&\text{Let } d, t\in \mathbb{Z}: c = 2^d \cdot t, t \text{ is odd}
+\end{align*}
 ```
-
-Let $m = m_f$, such that either m is odd or $g^{m/2} = 1 (mod n)$.
-
-We will look at some interesting values of $m_x$. First, rewrite k by getting
-the powers of 2 away:
+Without loss of generality, assume $a \leq b$.
 ```math
-Define integers a and r: \phi(p) = 2^a \cdot r, r is odd
-Define ingeters b and s: \phi(q) = 2^b \cdot s, s is odd
-Define integers d and t: c = 2^d \cdot t, t is odd
-```
-Without loss of generality, assume a <= b.
-```math
-k = c \cdot phi(n) = c * phi(p) \cdot phi(q) = 2^{a+b+d} \cdot rst
+k = c \cdot \phi(n) = c \cdot \phi(p) \cdot \phi(q) = 2^{a+b+d} \cdot rst
 ```
 
 ### Analysing x <= d + a
-For $x <= d + a$, $g^m_x = 1 (mod n)$. To prove that, we look at the values modulo p and q:
+If $x <= d + a$, then $g^{m_x} = 1 \ (\text{mod } n)$.
+
+To prove that, we look at the value of $g^{m_x}$ modulo p and q:
 ```math
-x <= d + a \rightarrow m_x = d + a - \Delta, \Delta \geq 0
-m_x = k / 2^x = \frac{2^{a+b+d} \cdot rst}{2^{d+a-\Delta}} = 2^{b+\Delta}\cdot rst
+\begin{align*}
+& x \leq d + a \rightarrow x = d + a - \Delta, \Delta \geq 0 \\
+& m_x = k / 2^x = \frac{2^{a+b+d} \cdot rst}{2^{d+a-\Delta}} = 2^{b+\Delta}\cdot rst
+\end{align*}
 ```
 Rewriting according to q:
 ```math
-m_x = 2^\Delta \cdot rt \cdot 2^b\cdot s = 2^\Delta\cdot rt\phi(q)
-g^m_x = g^{2^\Delta\cdot rt\phi(q)} = 1 (mod q) (Euler's theorem)
+\begin{align*}
+& m_x = 2^\Delta \cdot rt \cdot 2^b\cdot s = 2^\Delta rt\cdot \phi(q) \\
+& g^{m_x} = g^{2^\Delta rt\cdot \phi(q)} = 1 \ (\text{mod } q) \text{ (Euler's theorem)}
+\end{align*}
 ```
 Rewriting according to p:
 ```math
-m_x = 2^{\Delta+b-a} \cdot st \cdot 2^a\cdot r = 2^{\Delta+b-a}cdot rt\phi(p), b-a>=0
-g^m_x = g^{2^{\Delta+b-a}cdot rt\phi(p)} = 1 (mod p) (Euler's theorem)
+\begin{align*}
+& m_x = 2^{\Delta+b-a} \cdot st \cdot 2^a r = 2^{\Delta+b-a} rt\cdot \phi(p), b-a>=0 \\
+& g^{m_x} = g^{2^{\Delta+b-a} rt\cdot \phi(p)} = 1 \ (\text{mod } p) \text{ (Euler's theorem)}
+\end{align*}
 ```
 
-From the two equations, we can use apply the CRT for `n = p\cdot q`:
+From the two equations:
 ```math
-g^m_x = 1 (mod n)
+\begin{align*}
+& g^{m_x} = 1 \ (	\text{mod } p) \\
+& g^{m_x} = 1 \ (	\text{mod } q) 
+\end{align*}
+```
+we can apply the CRT for $n = p\cdot q$:
+```math
+g^{m_x} = 1 \ (	\text{mod } n) 
 ```
 
-Next, we'll look at x = d + a + 1. However, it will be split in two cases: when a = b, and when a < b.
+Next, we'll look at $x = d + a + 1$. However, it will be split in two cases: $a = b$, and $a < b$.
 
 ### First case: a < b
 
-Let x = d + a + 1
+Let $x = d + a + 1$.
 
 If $a < b$, then $a <= b - 1$. We can write $b-1$ as $b - 1 = a + \Delta, \Delta >= 0$.
 
 ```math
 m_x = 2^{b - 1} \cdot rst = 2^{a + \Delta}\cdot rst
 ```
-Looking at the $g^m_x mod p$:
+Looking at $g^{m_x} \text{ mod } p$:
 ```math
-g^m_x = g^{2^{\Delta} \cdot st 2^{a} \cdot r} = g^{2^\Delta\cdot st \phi(p)} = 1 (mod p)
+g^{m_x} = g^{2^{\Delta} \cdot st 2^{a} \cdot r} = g^{2^\Delta st\cdot  \phi(p)} = 1 \ (\text{mod } p)
 ```
 
-However, for mod p, the two's exponent is two small, as $rst$ is odd.
-Multiplying by two should be enough to get $\phi(q)$:
+However, for mod q, the two's exponent is too small, as $rst$ is odd.
+Multiplying by 2 should be enough to get back to $\phi(q)$:
 ```math
-m_x = rt\cdot 2^b\cdot s / 2 = rt\cdot phi(q) / 2
+m_x = rt\cdot 2^b s / 2 = rt\cdot \phi(q) / 2
 ```
 
 What we hope is that g is a quadratic non-residue mod q. Assuming this, and using Euler's criterion and the fact that $rt$ is odd:
 ```math
-g^m_x = g^{rt\cdot phi(q) / 2} = (g^{phi(q) / 2})^{rt} = (-1)^rt = -1 (mod q)
+g^{m_x} = g^{rt\cdot phi(q) / 2} = (g^{phi(q) / 2})^{rt} = (-1)^{rt} = -1 \ (\text{mod } q)
 ```
 
 This is great! We've got a value that's 1 mod p and -1 mod q, which we can also compute modulo n.
 This will be a non-trivial square root.
 
-However, this happends only when g is a quadratic non-residue mod q. Half of the elements are non-residues.
+However, this happens only when g is a quadratic non-residue mod q. Half of the elements are non-residues.
 
 So, the chance of this happening, when a < b, is 1/2.
 
@@ -352,7 +312,7 @@ So, the chance of this happening, when a < b, is 1/2.
 Let x = d + a + 1
 
 This case is a little different, because we can't guarantee that $g^m_x$ will be 1 mod p or 1 mod q.
-But there is still a chance.
+However, there is still a chance.
 
 ```math
 m_x = 2^{b-1} \cdot rst
@@ -361,47 +321,50 @@ m_x = 2^{b-1} \cdot rst
 Now, we'll assume that g is a quadratic residue mod p, and a quadratic non-residue mod q.
 Express $m_x$ using $\phi(p)$:
 ```math
-m_x = 2^{b} \cdot rst / 2 = st \phi(p) / 2
+m_x = 2^{b} \cdot rst / 2 = st \cdot \phi(p) / 2
 ```
 Using Euler's criterion:
 ```math
-g^m_x = g^{st \phi(p) / 2} = (g^{\phi(p) / 2})^{st} = 1^{st} = 1 (mod p)
+g^{m_x} = g^{st \cdot \phi(p) / 2} = (g^{\phi(p) / 2})^{st} = 1^{st} = 1 \ (\text{mod } p)
 ```
 
-Then, express $m_x$ using $\phi{q}$
+Then, express $m_x$ using $\phi(q)$
 ```math
-m_x = 2^{b} \cdot rst / 2 = rt \phi(q) / 2
+m_x = 2^{b} \cdot rst / 2 = rt \cdot \phi(q) / 2
 ```
 Using Euler's criterion, and the fact that $st$ is odd:
 ```math
-g^m_x = g^{rt \phi(q) / 2} = (g^{\phi(q) / 2})^{rt} = (-1)^{st} = -1 (mod q)
+g^{m_x} = g^{rt \cdot \phi(q) / 2} = (g^{\phi(q) / 2})^{rt} = (-1)^{st} = -1 \ (\text{mod } q)
 ```
 
 This means that $g^{m_x}$ is a non-trivial square root mod n.
 
 Conversely, we can also assume that g is a quadratic non-residue mod q, and a quadratic residue mod q.
 
-Since the value of $g$ mod p and mod q are independent, we can just multiply the porbabilities. Meaning
-that, if we know $g mod p$, this doesn't tell us anything about $g mod q$, because of CRT.
+Since the value of $g$ mod p and mod q are independent because of the CRT, we can just multiply the porbabilities.
 
 The chance of g having different residucity mod p and q is:
-```
+```math
 \frac{1}{2}\cdot\frac{1}{2} + \frac{1}{2}\cdot\frac{1}{2} = \frac{1}{2}
 ```
 
 ### Conclusion
 
-We can conclude that, when x <= d + a, $g^m_x = 1 (mod n)$. Also $m_x$ is even, because $b > 0$.
-So the algorithm won't because k can't be divided anymore. But $g^m_x/2 = g^{m_{x+1}}$, for which x+1 = a+b+1.
-There is a $1/2$ chance that this will be a non-trivial root.
+We can conclude that, when $x <= d + a$, $g^{m_x} = 1 \ (	\text{mod } n) $. Also $m_x$ is even, because $b > 0$.
+So the algorithm won't stop because k can't be divided anymore. But $g^m_x/2 = g^{m_{x+1}}$, for which x+1 = a+b+1.
+There is a $1/2$ chance that $g^{m_{x+1}}$ will be a non-trivial root.
 
 The algorithm can continue after $x = d + a$ with a 50% chance. And the probability could be tightened up,
-depending on the values of a and b, and looking at 2th power residues. But the  bound is good enough, because,
+depending on the values of a and b, and looking at 2th power residues. But the bound is good enough, because,
 in case of failure, the algorithm retries with a new g.
 
 The expected number of g's to be tried is less than 2.
 
 To have a 0.999 probability of success, 10 trials are enough.
+
+# The source code
+```python
+```
 
 # The solutions of x^m - a = 0 (mod p)
 
