@@ -170,7 +170,7 @@ What if $a = 1$? What we can try is to set $a$ to:
 \end{align*}
 ```
 
-Let $m = k / (2^{f-1})$. Then $g^m = 1 \ (	ext{mod } n)$  and $a = g^{m/2}$ is a square root of 1.
+Let $m = k / (2^{f-1})$. Then $g^m = 1 \ (	\text{mod } n)$  and $a = g^{m/2}$ is a square root of 1.
 
 This process finds an exponent for which $a$ might not be 1. If $a$ isn't a non-trivial root, choose
 another g and try again.
