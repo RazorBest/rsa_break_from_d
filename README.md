@@ -207,7 +207,7 @@ Each iteration step can be described by:
 ```
 And the iteration stops when $m_{x+1}$ is odd or $g^{m_{x}/2} \equiv 1\ (\text{mod } n)$
 
-Let $m = m_f$, such that either m is odd or $g^{m/2} = 1 (\ (	ext{mod } n) )$.
+Let $m = m_f$, such that either m is odd or $g^{m/2} = 1 (\ ( \text{mod } n) )$.
 
 We will look at some interesting values of $m_x$. First, rewrite k by extracting the powers of 2 outside:
 ```math
