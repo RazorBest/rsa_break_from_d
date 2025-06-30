@@ -327,7 +327,7 @@ This means that $g^{m_x}$ is a non-trivial square root mod n.
 
 Conversely, we can also assume that g is a quadratic non-residue mod q, and a quadratic residue mod q.
 
-Since the value of $g$ mod p and mod q are independent because of the CRT, we can just multiply the porbabilities.
+Since the value of $g$ mod p and mod q are independent because of the CRT, we can just multiply the probabilities.
 
 The chance of g having different residucity mod p and q is:
 ```math
