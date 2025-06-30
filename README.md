@@ -81,7 +81,7 @@ And
 \begin{align*}
 & a \equiv 1 \ (\text{mod } q) \\
 & \text{or} \\
-& a \equiv -1 \ (\text{mod} q)
+& a \equiv -1 \ (\text{mod } q)
 \end{align*}
 ```
 Since the results between p and q are independent, there are 4 possible
